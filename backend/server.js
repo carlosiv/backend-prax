@@ -1,5 +1,6 @@
 const express = require("express");
 const dotenv = require("dotenv");
+const { errorHandler } = require("../backend/middleware/errorMiddlewar");
 
 dotenv.config();
 const port = process.env.PORT || 5000;
@@ -7,7 +8,12 @@ const envi = process.env.NODE_ENV || "development";
 
 const app = express();
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
 app.use("/api/posts", require("./Routes/PostRoute"));
+
+app.use(errorHandler);
 
 app.listen(port, () => {
   console.log(`Server started on port ${port} @${envi}`);

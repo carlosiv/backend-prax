@@ -3,7 +3,11 @@ const getPosts = (req, res) => {
 };
 
 const addPost = (req, res) => {
-  res.status(200).json({ posts: "set post" });
+  if (!req.body.post) {
+    res.status(400);
+    throw new Error("Please add post");
+  }
+  res.status(200).json({ message: `${req.body.post} added successfully` });
 };
 
 const editPost = (req, res) => {
