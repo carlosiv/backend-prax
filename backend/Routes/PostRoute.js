@@ -7,12 +7,8 @@ const {
   deletePost,
 } = require("../Controllers/postsController");
 
-router.get("/", getPosts);
+router.route("/").get(getPosts).post(addPost);
 
-router.post("/", addPost);
-
-router.put("/:id", editPost);
-
-router.delete("/:id", deletePost);
+router.route("/:id").put(editPost).delete(deletePost);
 
 module.exports = router;
